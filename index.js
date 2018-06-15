@@ -12,6 +12,7 @@ const deps = {
     "babel-polyfill",
     "html-webpack-plugin",
     "prop-types",
+    "express",
     "react",
     "react-dom",
     "react-redux",
@@ -21,7 +22,8 @@ const deps = {
     "redux-saga",
     "webpack",
     "node-sass",
-    "history"
+    "history",
+    "isomorphic-fetch"
   ],
   "devDependencies": [
     "babel-core",
@@ -44,6 +46,7 @@ const deps = {
     "jest",
     "fetch-mock",
     "style-loader",
+    "shortid",
     "postcss-loader",
     "postcss-flexbugs-fixes",
     "sass-loader",
@@ -88,7 +91,6 @@ const executeBashCommand = (command, loadingText) => {
 const createFolder = folder => {
   return executeFunction(callback => fs.mkdir(folder, callback), `Creating ${folder}`);
 };
-//TODO don't forget to include the correct dependencies
 
 const cli = () => {
   return new Promise((outerResolve, outerReject) => {
@@ -160,7 +162,8 @@ const cli = () => {
               linter: "./node_modules/.bin/eslint src --ext .js,.jsx && ./node_modules/.bin/eslint test --ext .js,.jsx",
               webpack: "export NODE_ENV=production && ./node_modules/.bin/webpack -p --progress",
               bundlesize: "bundlesize",
-              "analyze-bundle": "export ANALYZE_BUNDLE=true && npm run webpack"
+              "analyze-bundle": "export ANALYZE_BUNDLE=true && npm run webpack",
+              "server-watch": "NODE_ENV=development && babel-watch src/server/index.js"
             },
             jest: {
               ...pkgJson.jest,
@@ -170,7 +173,7 @@ const cli = () => {
                 "\\.(css|scss|less)$": "identity-obj-proxy"
               },
               collectCoverageFrom: [
-                "src/client/**/*.{js*}",
+                "src/**/*.{js*}",
                 "!src/client/browser-history.js",
                 "!src/client/app.js",
                 "!src/client/router.js",
@@ -236,11 +239,16 @@ npm-debug.log`;
             "src/client/browser-history.js",
             "src/client/index.html",
             "src/client/router.js",
+            "src/server/index.js",
+            "src/shared/constants.js",
+            "src/shared/fetch-wrapper.js",
             "test/client/__mocks__/file-mock.js",
             "test/client/actions/sagas/ping-server.spec.js",
             "test/client/actions/index.spec.js",
             "test/client/config.js",
-            "test/client/reducers/index.spec.js"
+            "test/client/reducers/index.spec.js",
+            "test/server/index.spec.js",
+            "test/shared/fetch-wrapper.spec.js"
           ];
           for (const f of files) {
             try {

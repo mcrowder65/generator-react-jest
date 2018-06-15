@@ -34,8 +34,8 @@ var fs = require("fs-extra");
 var packageJson = require("./package.json");
 
 var deps = {
-  "dependencies": ["babel-runtime", "babel-polyfill", "html-webpack-plugin", "prop-types", "react", "react-dom", "react-redux", "react-router", "react-router-dom", "redux", "redux-saga", "webpack", "node-sass", "history"],
-  "devDependencies": ["babel-core", "babel-eslint", "babel-jest", "babel-loader", "babel-plugin-transform-async-to-generator", "babel-plugin-transform-class-properties", "babel-plugin-transform-es2015-modules-umd", "babel-plugin-transform-object-rest-spread", "babel-plugin-transform-runtime", "babel-preset-env", "babel-preset-react", "bundlesize", "compression-webpack-plugin", "css-loader", "enzyme", "enzyme-adapter-react-16", "eslint-config-mcrowder65", "jest", "fetch-mock", "style-loader", "postcss-loader", "postcss-flexbugs-fixes", "sass-loader", "react-hot-loader", "webpack-dev-server", "identity-obj-proxy", "webpack-bundle-analyzer"]
+  "dependencies": ["babel-runtime", "babel-polyfill", "html-webpack-plugin", "prop-types", "express", "react", "react-dom", "react-redux", "react-router", "react-router-dom", "redux", "redux-saga", "webpack", "node-sass", "history", "isomorphic-fetch"],
+  "devDependencies": ["babel-core", "babel-eslint", "babel-jest", "babel-loader", "babel-plugin-transform-async-to-generator", "babel-plugin-transform-class-properties", "babel-plugin-transform-es2015-modules-umd", "babel-plugin-transform-object-rest-spread", "babel-plugin-transform-runtime", "babel-preset-env", "babel-preset-react", "bundlesize", "compression-webpack-plugin", "css-loader", "enzyme", "enzyme-adapter-react-16", "eslint-config-mcrowder65", "jest", "fetch-mock", "style-loader", "shortid", "postcss-loader", "postcss-flexbugs-fixes", "sass-loader", "react-hot-loader", "webpack-dev-server", "identity-obj-proxy", "webpack-bundle-analyzer"]
 };
 var executeFunction = function executeFunction(func, loadingText) {
   var spinner = void 0;
@@ -77,7 +77,6 @@ var createFolder = function createFolder(folder) {
     return fs.mkdir(folder, callback);
   }, "Creating " + folder);
 };
-//TODO don't forget to include the correct dependencies
 
 var cli = function cli() {
   return new Promise(function (outerResolve, outerReject) {
@@ -125,7 +124,8 @@ var cli = function cli() {
                         linter: "./node_modules/.bin/eslint src --ext .js,.jsx && ./node_modules/.bin/eslint test --ext .js,.jsx",
                         webpack: "export NODE_ENV=production && ./node_modules/.bin/webpack -p --progress",
                         bundlesize: "bundlesize",
-                        "analyze-bundle": "export ANALYZE_BUNDLE=true && npm run webpack"
+                        "analyze-bundle": "export ANALYZE_BUNDLE=true && npm run webpack",
+                        "server-watch": "NODE_ENV=development && babel-watch src/server/index.js"
                       }),
                       jest: (0, _extends4.default)({}, pkgJson.jest, {
                         setupTestFrameworkScriptFile: "<rootDir>/test/client/config.js",
@@ -133,7 +133,7 @@ var cli = function cli() {
                           "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/file-mock.js",
                           "\\.(css|scss|less)$": "identity-obj-proxy"
                         },
-                        collectCoverageFrom: ["src/client/**/*.{js*}", "!src/client/browser-history.js", "!src/client/app.js", "!src/client/router.js", "!src/client/actions/sagas/config.js", "!src/client/actions/sagas/index.js"],
+                        collectCoverageFrom: ["src/**/*.{js*}", "!src/client/browser-history.js", "!src/client/app.js", "!src/client/router.js", "!src/client/actions/sagas/config.js", "!src/client/actions/sagas/index.js"],
                         modulePaths: ["src/client/"],
                         coverageReporters: ["html"]
                       })
@@ -228,7 +228,7 @@ var cli = function cli() {
               while (1) {
                 switch (_context3.prev = _context3.next) {
                   case 0:
-                    files = ["webpack.config.js", ".babelrc", "src/client/actions/sagas/config.js", "src/client/actions/sagas/index.js", "src/client/actions/sagas/ping-server.js", "src/client/actions/sagas/types.js", "src/client/actions/index.js", "src/client/actions/types.js", "src/client/components/home.js", "src/client/reducers/index.js", "src/client/reducers/initial-state.js", "src/client/styles/base.scss", "src/client/app.js", "src/client/browser-history.js", "src/client/index.html", "src/client/router.js", "test/client/__mocks__/file-mock.js", "test/client/actions/sagas/ping-server.spec.js", "test/client/actions/index.spec.js", "test/client/config.js", "test/client/reducers/index.spec.js"];
+                    files = ["webpack.config.js", ".babelrc", "src/client/actions/sagas/config.js", "src/client/actions/sagas/index.js", "src/client/actions/sagas/ping-server.js", "src/client/actions/sagas/types.js", "src/client/actions/index.js", "src/client/actions/types.js", "src/client/components/home.js", "src/client/reducers/index.js", "src/client/reducers/initial-state.js", "src/client/styles/base.scss", "src/client/app.js", "src/client/browser-history.js", "src/client/index.html", "src/client/router.js", "src/server/index.js", "src/shared/constants.js", "src/shared/fetch-wrapper.js", "test/client/__mocks__/file-mock.js", "test/client/actions/sagas/ping-server.spec.js", "test/client/actions/index.spec.js", "test/client/config.js", "test/client/reducers/index.spec.js", "test/server/index.spec.js", "test/shared/fetch-wrapper.spec.js"];
                     _iteratorNormalCompletion = true;
                     _didIteratorError = false;
                     _iteratorError = undefined;

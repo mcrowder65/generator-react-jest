@@ -26,3 +26,5 @@ app.get("/ping", (req, res) => {
 app.use(express.static(path.resolve(__dirname, "../..", "build")));
 // eslint-disable-next-line no-console
 app.listen(3000, () => console.log(`server started on port 3000`));
+
+export default app;
