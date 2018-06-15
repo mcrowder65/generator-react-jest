@@ -77,6 +77,7 @@ var createFolder = function createFolder(folder) {
     return fs.mkdir(folder, callback);
   }, "Creating " + folder);
 };
+//TODO don't forget to include the correct dependencies
 
 var cli = function cli() {
   return new Promise(function (outerResolve, outerReject) {
