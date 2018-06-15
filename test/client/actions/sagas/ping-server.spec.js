@@ -24,7 +24,7 @@ describe("pingServer", () => {
 describe("apiCall", () => {
   test("api call", async () => {
     const response = "hello";
-    fetchMock.mock("http://localhost:3000/ping", response);
+    fetchMock.get("http://localhost:3000/ping", { body: response, sendAsJson: false, headers: { "Content-Type": "text/html" } });
     const result = await apiCall();
     expect(result).toEqual(response);
 

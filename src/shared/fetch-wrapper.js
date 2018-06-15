@@ -23,6 +23,7 @@ const fetchWrapper = async ({
 }) => {
   // do this here to get Content-Type to not be overridden if you didn't want to.
   const actualHeaders = { ...initialHeaders, ...headers };
+
   const response = await fetch(url, {
     method,
     headers: actualHeaders,
@@ -40,18 +41,18 @@ const fetchWrapper = async ({
 };
 
 
-export const fetchGet = ({ url, headers, credentials }) => {
-  return fetchWrapper({ url, method: "GET", headers, credentials });
+export const fetchGet = ({ url, headers }) => {
+  return fetchWrapper({ url, method: "GET", headers });
 };
 
-export const fetchPost = ({ url, body, headers, credentials }) => {
-  return fetchWrapper({ url, method: "POST", body, headers, credentials });
+export const fetchPost = ({ url, body, headers }) => {
+  return fetchWrapper({ url, method: "POST", body, headers });
 };
 
-export const fetchPut = ({ url, body, headers, credentials }) => {
-  return fetchWrapper({ url, method: "PUT", body, headers, credentials });
+export const fetchPut = ({ url, body, headers }) => {
+  return fetchWrapper({ url, method: "PUT", body, headers });
 };
 
-export const fetchDelete = ({ url, body, headers, credentials }) => {
-  return fetchWrapper({ url, method: "DELETE", body, headers, credentials });
+export const fetchDelete = ({ url, body, headers }) => {
+  return fetchWrapper({ url, method: "DELETE", body, headers });
 };

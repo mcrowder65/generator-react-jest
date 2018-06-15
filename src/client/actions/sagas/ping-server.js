@@ -1,15 +1,15 @@
 import { call, put } from "redux-saga/effects";
 
 import { setPing } from "../index";
+import { fetchGet } from "../../../shared/fetch-wrapper";
+import { HTTP_RESPONSE_TYPES } from "../../../shared/constants";
 
 const url = process.env.NODE_ENV === "production" ? "" : "http://localhost:3000";
-export const apiCall = async () => {
+export const apiCall = () => {
   // this is up to you whether or not you want to implement this server...
-  const res = await fetch(`${url}/ping`, { method: "GET" });
-  return res.text();
+  return fetchGet({ url: `${url}/ping`, headers: { "Content-Type": HTTP_RESPONSE_TYPES.PLAIN, Accept: HTTP_RESPONSE_TYPES.PLAIN } });
 };
 
-// eslint-disable-next-line
 export function* pingServer() {
   try {
     const resp = yield call(apiCall);
