@@ -21,7 +21,8 @@
     "jest": "npm run pre-jest && jest --coverage --silent && npm run pre-jest",
     "bundlesize": "bundlesize",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "server-watch": "NODE_ENV=development && babel-watch src/server/index.js"
   },
   "bundlesize": [
     {
@@ -54,6 +55,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/client/**/*.{js*}",
+      "src/server/**/*.{js*}",
       "index.js",
       "!src/client/browser-history.js",
       "!src/client/app.js",
