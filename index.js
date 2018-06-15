@@ -88,7 +88,7 @@ const executeBashCommand = (command, loadingText) => {
 const createFolder = folder => {
   return executeFunction(callback => fs.mkdir(folder, callback), `Creating ${folder}`);
 };
-
+//TODO don't forget to include the correct dependencies
 
 const cli = () => {
   return new Promise((outerResolve, outerReject) => {
