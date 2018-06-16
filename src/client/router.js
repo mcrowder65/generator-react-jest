@@ -9,6 +9,7 @@ const Router = () => (
   <BrowserRouter history={browserHistory}>
     <div>
       <Route exact path="/" component={Home}/>
+      <Route path="/asdf" component={Home}/>
     </div>
   </BrowserRouter>
 

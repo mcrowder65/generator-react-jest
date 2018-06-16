@@ -180,7 +180,7 @@ const cli = () => {
                 "!src/client/actions/sagas/config.js",
                 "!src/client/actions/sagas/index.js"
               ],
-              modulePaths: ["src/client/"],
+              modulePaths: ["src/"],
               coverageReporters: ["html"]
             }
 

@@ -5,7 +5,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const isProd = process.env.NODE_ENV === "production";
-const sourcePath = path.join(__dirname, "./src/client");
+const sourcePath = path.join(__dirname, "src");
 const webpackConfig = {
   cache: !isProd,
   devtool: isProd ? "" : "eval-cheap-module-source-map",

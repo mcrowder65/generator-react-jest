@@ -1,6 +1,6 @@
-import rootReducer from "reducers/index";
-import initialState from "reducers/initial-state";
-import { setInput, setPing } from "actions";
+import rootReducer from "client/reducers/index";
+import initialState from "client/reducers/initial-state";
+import { setInput, setPing } from "client/actions";
 
 describe("input", () => {
   test("When not passing in a state, it should default to initialState.input", () => {

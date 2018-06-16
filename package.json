@@ -72,7 +72,7 @@
       "lcov"
     ],
     "modulePaths": [
-      "src/client/"
+      "src/"
     ],
     "globals": {
       "localStorage": {}

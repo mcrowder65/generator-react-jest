@@ -5,10 +5,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import fetchMock from "fetch-mock";
 
-import initialState from "reducers/initial-state";
-import rootReducer from "reducers/index";
-import Home from "components/home";
-import sagaActions from "actions/sagas";
+import initialState from "client/reducers/initial-state";
+import rootReducer from "client/reducers/index";
+import Home from "client/components/home";
+import sagaActions from "client/actions/sagas";
 
 const generateEvent = value => ({ target: { value } });
 describe("test/client/components/home.spec.js", () => {
@@ -43,7 +43,7 @@ describe("full suite around", () => {
     home.find("#input").props().onChange(generateEvent("hello"));
     expect(store.getState().input).toEqual("hello");
     const response = "hello";
-    fetchMock.mock("http://localhost:3000/ping", response);
+    fetchMock.get("http://localhost:3000/ping", { body: response, sendAsJson: false, headers: { "Content-Type": "text/html" } });
     home.find("#ping-server").props().onClick();
     await delay(1000);
     home.update();
