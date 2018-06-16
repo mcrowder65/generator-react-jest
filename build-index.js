@@ -134,7 +134,7 @@ var cli = function cli() {
                           "\\.(css|scss|less)$": "identity-obj-proxy"
                         },
                         collectCoverageFrom: ["src/**/*.{js*}", "!src/client/browser-history.js", "!src/client/app.js", "!src/client/router.js", "!src/client/actions/sagas/config.js", "!src/client/actions/sagas/index.js"],
-                        modulePaths: ["src/client/"],
+                        modulePaths: ["src/"],
                         coverageReporters: ["html"]
                       })
 
