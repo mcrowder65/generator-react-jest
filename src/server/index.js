@@ -8,7 +8,10 @@ if (process.env.NODE_ENV === "development") {
   console.log("CORs enabled");
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     next();
   });
 }
@@ -24,6 +27,12 @@ app.get("/ping", (req, res) => {
   res.send(`The server says hello`);
 });
 app.use(express.static(path.resolve(__dirname, "../..", "build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../build", "index.html"));
+});
+
 // eslint-disable-next-line no-console
-const server = app.listen(3000, () => console.log(`server started on port 3000`));
+const server = app.listen(3000, () =>
+  console.log(`server started on port 3000`)
+);
 export default server;
