@@ -35,7 +35,7 @@ var packageJson = require("./package.json");
 
 var deps = {
   dependencies: ["babel-runtime", "html-webpack-plugin", "prop-types", "express", "react", "react-dom", "react-router", "react-router-dom", "webpack", "node-sass", "history", "isomorphic-fetch"],
-  devDependencies: ["babel-core", "babel-eslint", "babel-jest", "babel-loader", "babel-plugin-transform-async-to-generator", "babel-plugin-transform-class-properties", "babel-plugin-transform-es2015-modules-umd", "babel-plugin-transform-object-rest-spread", "babel-plugin-transform-runtime", "babel-plugin-syntax-dynamic-import", "babel-plugin-import", "babel-preset-env", "babel-preset-react", "bundlesize", "compression-webpack-plugin", "css-loader", "enzyme", "enzyme-adapter-react-16", "eslint-config-mcrowder65", "jest", "fetch-mock", "style-loader", "shortid", "postcss-loader", "postcss-flexbugs-fixes", "sass-loader", "react-hot-loader", "webpack-dev-server", "identity-obj-proxy", "webpack-bundle-analyzer"]
+  devDependencies: ["babel-core", "babel-eslint", "babel-jest", "babel-loader", "babel-plugin-transform-async-to-generator", "babel-plugin-transform-class-properties", "babel-plugin-transform-es2015-modules-umd", "babel-plugin-transform-object-rest-spread", "babel-plugin-transform-runtime", "babel-plugin-syntax-dynamic-import", "babel-plugin-import", "babel-preset-env", "babel-preset-react", "bundlesize", "compression-webpack-plugin", "copy-webpack-plugin", "css-loader", "enzyme", "enzyme-adapter-react-16", "eslint-config-mcrowder65", "jest", "fetch-mock", "style-loader", "shortid", "postcss-loader", "postcss-flexbugs-fixes", "sass-loader", "sw-precache-webpack-plugin", "react-hot-loader", "webpack-dev-server", "identity-obj-proxy", "webpack-bundle-analyzer", "webpack-manifest-plugin"]
 };
 var executeFunction = function executeFunction(func, loadingText) {
   var spinner = void 0;
@@ -226,7 +226,7 @@ var cli = function cli() {
               while (1) {
                 switch (_context3.prev = _context3.next) {
                   case 0:
-                    files = ["webpack.config.js", ".babelrc", "src/client/components/home.js", "src/client/components/__tests__/home.test.js", "src/client/app.js", "src/client/browser-history.js", "src/client/index.html", "src/client/router.js", "src/server/index.js", "src/server/__tests__/index.test.js", "src/shared/constants.js", "src/shared/fetch-wrapper.js", "src/shared/__tests__/fetch-wrapper.test.js", "src/shared/utils.js", "test/__mocks__/file-mock.js", "test/config.js"];
+                    files = ["webpack.config.js", ".babelrc", "src/registerServiceWorker.js", "src/client/pwa/logo.jpg", "src/client/pwa/manifest.json", "src/client/components/home.js", "src/client/components/__tests__/home.test.js", "src/client/app.js", "src/client/browser-history.js", "src/client/index.html", "src/client/router.js", "src/server/index.js", "src/shared/constants.js", "src/shared/fetch-wrapper.js", "src/shared/__tests__/fetch-wrapper.test.js", "src/shared/utils.js", "test/__mocks__/file-mock.js", "test/config.js"];
                     _iteratorNormalCompletion = true;
                     _didIteratorError = false;
                     _iteratorError = undefined;

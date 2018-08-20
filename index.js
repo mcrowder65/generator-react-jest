@@ -37,6 +37,7 @@ const deps = {
     "babel-preset-react",
     "bundlesize",
     "compression-webpack-plugin",
+    "copy-webpack-plugin",
     "css-loader",
     "enzyme",
     "enzyme-adapter-react-16",
@@ -48,10 +49,12 @@ const deps = {
     "postcss-loader",
     "postcss-flexbugs-fixes",
     "sass-loader",
+    "sw-precache-webpack-plugin",
     "react-hot-loader",
     "webpack-dev-server",
     "identity-obj-proxy",
-    "webpack-bundle-analyzer"
+    "webpack-bundle-analyzer",
+    "webpack-manifest-plugin"
   ]
 };
 const executeFunction = (func, loadingText) => {
@@ -246,6 +249,9 @@ npm-debug.log`;
           const files = [
             "webpack.config.js",
             ".babelrc",
+            "src/registerServiceWorker.js",
+            "src/client/pwa/logo.jpg",
+            "src/client/pwa/manifest.json",
             "src/client/components/home.js",
             "src/client/components/__tests__/home.test.js",
             "src/client/app.js",
@@ -253,7 +259,6 @@ npm-debug.log`;
             "src/client/index.html",
             "src/client/router.js",
             "src/server/index.js",
-            "src/server/__tests__/index.test.js",
             "src/shared/constants.js",
             "src/shared/fetch-wrapper.js",
             "src/shared/__tests__/fetch-wrapper.test.js",
