@@ -189,11 +189,12 @@ const cli = () => {
               },
               collectCoverageFrom: [
                 "src/**/*.{js*}",
+                "index.js",
                 "!src/client/browser-history.js",
                 "!src/client/app.js",
                 "!src/client/router.js",
-                "!src/client/actions/sagas/config.js",
-                "!src/client/actions/sagas/index.js"
+                "!src/registerServiceWorker.js",
+                "!src/server/index.js"
               ],
               modulePaths: ["src/"],
               coverageReporters: ["html"]
