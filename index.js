@@ -7,25 +7,21 @@ const fs = require("fs-extra");
 const packageJson = require("./package.json");
 
 const deps = {
-  "dependencies": [
+  dependencies: [
     "babel-runtime",
-    "babel-polyfill",
     "html-webpack-plugin",
     "prop-types",
     "express",
     "react",
     "react-dom",
-    "react-redux",
     "react-router",
     "react-router-dom",
-    "redux",
-    "redux-saga",
     "webpack",
     "node-sass",
     "history",
     "isomorphic-fetch"
   ],
-  "devDependencies": [
+  devDependencies: [
     "babel-core",
     "babel-eslint",
     "babel-jest",
@@ -73,7 +69,6 @@ const executeFunction = (func, loadingText) => {
           }
           resolve(output);
         }
-
       });
     } catch (error) {
       reject(error);
@@ -82,19 +77,24 @@ const executeFunction = (func, loadingText) => {
 };
 
 const removeFolder = folder => {
-  return executeFunction(callback => fs.remove(folder, callback), `Removing ${folder}`);
+  return executeFunction(
+    callback => fs.remove(folder, callback),
+    `Removing ${folder}`
+  );
 };
 const executeBashCommand = (command, loadingText) => {
   return executeFunction(callback => exec(command, callback), loadingText);
 };
 
 const createFolder = folder => {
-  return executeFunction(callback => fs.mkdir(folder, callback), `Creating ${folder}`);
+  return executeFunction(
+    callback => fs.mkdir(folder, callback),
+    `Creating ${folder}`
+  );
 };
 
 const cli = () => {
   return new Promise((outerResolve, outerReject) => {
-
     program
       .version(packageJson.version)
       .arguments("<folder>")
@@ -115,7 +115,10 @@ const cli = () => {
           }
           execInFolder = executeCmdInFolder();
           await createFolder(folder);
-          await execInFolder(`${pkg} init ${folder} -y`, `${pkg} init ${folder} -y`);
+          await execInFolder(
+            `${pkg} init ${folder} -y`,
+            `${pkg} init ${folder} -y`
+          );
           if (program.git) {
             await gitInit();
           }
@@ -137,7 +140,9 @@ const cli = () => {
           outerReject(error);
         }
         async function fixPackageJson() {
-          const pkgJson = JSON.parse(await readFile(`${folder}/package.json`, false));
+          const pkgJson = JSON.parse(
+            await readFile(`${folder}/package.json`, false)
+          );
           const { dependencies, devDependencies } = deps;
 
           const newPkg = {
@@ -149,27 +154,32 @@ const cli = () => {
             },
             bundlesize: [
               {
-                "path": "./build/bundle.js",
-                "compression": "gzip",
-                "maxSize": "100 kB"
+                path: "./build/bundle.js",
+                compression: "gzip",
+                maxSize: "100 kB"
               }
             ],
             scripts: {
               ...pkgJson.scripts,
-              start: "export NODE_ENV=development && ./node_modules/.bin/webpack-dev-server",
+              start:
+                "export NODE_ENV=development && ./node_modules/.bin/webpack-dev-server",
               test: "npm run linter && npm run jest",
               jest: "./node_modules/.bin/jest --coverage",
-              linter: "./node_modules/.bin/eslint src --ext .js,.jsx && ./node_modules/.bin/eslint test --ext .js,.jsx",
-              webpack: "export NODE_ENV=production && ./node_modules/.bin/webpack -p --progress",
+              linter:
+                "./node_modules/.bin/eslint src --ext .js,.jsx && ./node_modules/.bin/eslint test --ext .js,.jsx",
+              webpack:
+                "export NODE_ENV=production && ./node_modules/.bin/webpack -p --progress",
               bundlesize: "bundlesize",
               "analyze-bundle": "export ANALYZE_BUNDLE=true && npm run webpack",
-              "server-watch": "NODE_ENV=development && babel-watch src/server/index.js"
+              "server-watch":
+                "NODE_ENV=development && babel-watch src/server/index.js"
             },
             jest: {
               ...pkgJson.jest,
               setupTestFrameworkScriptFile: "<rootDir>/test/client/config.js",
               moduleNameMapper: {
-                "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/file-mock.js",
+                "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+                  "<rootDir>/__mocks__/file-mock.js",
                 "\\.(css|scss|less)$": "identity-obj-proxy"
               },
               collectCoverageFrom: [
@@ -183,15 +193,22 @@ const cli = () => {
               modulePaths: ["src/"],
               coverageReporters: ["html"]
             }
-
           };
-          await writeFile(`${folder}/package.json`, JSON.stringify(newPkg, null, 2));
+          await writeFile(
+            `${folder}/package.json`,
+            JSON.stringify(newPkg, null, 2)
+          );
           if (process.platform === "win32") {
-            displaySuccessMessage("Installation of node_modules will be skipped because windows is not supported for node_module installation on this cli.");
+            displaySuccessMessage(
+              "Installation of node_modules will be skipped because windows is not supported for node_module installation on this cli."
+            );
           } else if (program.skip) {
             displaySuccessMessage("Skipping installation of node_modules");
           } else {
-            await execInFolder(`${install()}`, "Installing dependencies and devDependencies");
+            await execInFolder(
+              `${install()}`,
+              "Installing dependencies and devDependencies"
+            );
           }
           function mapDeps(myDeps) {
             const mattPkg = require("./package.json");
@@ -209,7 +226,9 @@ const cli = () => {
         }
         async function gitInit() {
           if (process.platform === "win32") {
-            displaySuccessMessage("git initialization not supported on windows by this cli");
+            displaySuccessMessage(
+              "git initialization not supported on windows by this cli"
+            );
           } else {
             await execInFolder(`git init`, `git init`);
             const gitIgnore = `node_modules
@@ -225,30 +244,20 @@ npm-debug.log`;
           const files = [
             "webpack.config.js",
             ".babelrc",
-            "src/client/actions/sagas/config.js",
-            "src/client/actions/sagas/index.js",
-            "src/client/actions/sagas/ping-server.js",
-            "src/client/actions/sagas/types.js",
-            "src/client/actions/index.js",
-            "src/client/actions/types.js",
             "src/client/components/home.js",
-            "src/client/reducers/index.js",
-            "src/client/reducers/initial-state.js",
-            "src/client/styles/base.scss",
+            "src/client/components/__tests__/home.test.js",
             "src/client/app.js",
             "src/client/browser-history.js",
             "src/client/index.html",
             "src/client/router.js",
             "src/server/index.js",
+            "src/server/__tests__/index.test.js",
             "src/shared/constants.js",
             "src/shared/fetch-wrapper.js",
-            "test/client/__mocks__/file-mock.js",
-            "test/client/actions/sagas/ping-server.spec.js",
-            "test/client/actions/index.spec.js",
-            "test/client/config.js",
-            "test/client/reducers/index.spec.js",
-            "test/server/index.spec.js",
-            "test/shared/fetch-wrapper.spec.js"
+            "src/shared/__tests__/fetch-wrapper.test.js",
+            "src/shared/utils.js",
+            "test/__mocks__/file-mock.js",
+            "test/config.js"
           ];
           for (const f of files) {
             try {
@@ -261,7 +270,6 @@ npm-debug.log`;
             }
           }
           displaySuccessMessage("Files scaffolded and placed");
-
         }
 
         async function createTravisFile() {
@@ -290,18 +298,21 @@ script:
         }
         function readFile(filename, includeDirname = true) {
           return new Promise((resolve, reject) => {
-            fs.readFile(`${includeDirname ? `${__dirname}/` : ""}${filename}`, "UTF-8", (err, data) => {
-              try {
-                if (err) {
-                  reject(err);
-                } else {
-                  resolve(data);
+            fs.readFile(
+              `${includeDirname ? `${__dirname}/` : ""}${filename}`,
+              "UTF-8",
+              (err, data) => {
+                try {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(data);
+                  }
+                } catch (error) {
+                  reject(error);
                 }
-
-              } catch (error) {
-                reject(error);
               }
-            });
+            );
           });
         }
         function writeFile(filename, content) {
@@ -338,7 +349,6 @@ script:
       })
       .parse(process.argv);
   });
-
 };
 
 export default cli;

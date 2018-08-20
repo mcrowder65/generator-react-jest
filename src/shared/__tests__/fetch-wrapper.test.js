@@ -6,8 +6,8 @@ import {
   fetchGet,
   fetchPost,
   fetchPut
-} from "../../src/shared/fetch-wrapper";
-import { HTTP_RESPONSE_TYPES } from "../../src/shared/constants";
+} from "shared/fetch-wrapper";
+import { HTTP_RESPONSE_TYPES } from "shared/constants";
 
 const restore = () => fetchMock.restore();
 describe("edge cases", () => {
@@ -17,18 +17,25 @@ describe("edge cases", () => {
     expect.assertions(1);
     try {
       const url = shortId.generate();
-      fetchMock.put(url, { body: {}, headers: { "content-type": undefined }, sendAsJson: false });
+      fetchMock.put(url, {
+        body: {},
+        headers: { "content-type": undefined },
+        sendAsJson: false
+      });
       await fetchPut({ url });
     } catch (e) {
       expect(e.message).toEqual("Response type was not defined");
     }
   });
-  test(`When giving a random content-type, (unique id), 
+  test(`When giving a random content-type, (unique id),
     it should throw since it's not handled`, async () => {
     expect.assertions(1);
     try {
       const url = shortId.generate();
-      fetchMock.get(url, { body: {}, headers: { "content-type": shortId.generate() } });
+      fetchMock.get(url, {
+        body: {},
+        headers: { "content-type": shortId.generate() }
+      });
       await fetchGet({ url });
     } catch (e) {
       expect(e.message).toEqual("Response type not supported yet!");
@@ -47,7 +54,9 @@ describe("edge cases", () => {
 });
 describe("All the different response types", () => {
   afterEach(restore);
-  test(`content-type: ${HTTP_RESPONSE_TYPES.JSON} should resolve to a json`, async () => {
+  test(`content-type: ${
+    HTTP_RESPONSE_TYPES.JSON
+  } should resolve to a json`, async () => {
     const body = { hello: "I am a string in a json" };
     const url = shortId.generate();
     fetchMock.post(url, {
@@ -57,7 +66,9 @@ describe("All the different response types", () => {
     const result = await fetchPost({ url });
     expect(result).toEqual(body);
   });
-  test(`content-type ${HTTP_RESPONSE_TYPES.HTML} should resolve to a string`, async () => {
+  test(`content-type ${
+    HTTP_RESPONSE_TYPES.HTML
+  } should resolve to a string`, async () => {
     const body = "I am a string ";
     const url = shortId.generate();
     fetchMock.put(url, {
@@ -67,7 +78,9 @@ describe("All the different response types", () => {
     const result = await fetchPut({ url });
     expect(result).toEqual(body);
   });
-  test(`content-type ${HTTP_RESPONSE_TYPES.PLAIN} should resolve to a string`, async () => {
+  test(`content-type ${
+    HTTP_RESPONSE_TYPES.PLAIN
+  } should resolve to a string`, async () => {
     const body = "I am a string ";
     const url = shortId.generate();
     fetchMock.delete(url, {
@@ -77,6 +90,4 @@ describe("All the different response types", () => {
     const result = await fetchDelete({ url });
     expect(result).toEqual(body);
   });
-
 });
-
