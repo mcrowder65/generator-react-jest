@@ -31,6 +31,8 @@ const deps = {
     "babel-plugin-transform-es2015-modules-umd",
     "babel-plugin-transform-object-rest-spread",
     "babel-plugin-transform-runtime",
+    "babel-plugin-syntax-dynamic-import",
+    "babel-plugin-import",
     "babel-preset-env",
     "babel-preset-react",
     "bundlesize",
@@ -154,7 +156,7 @@ const cli = () => {
             },
             bundlesize: [
               {
-                path: "./build/bundle.js",
+                path: "./build/*.bundle.js",
                 compression: "gzip",
                 maxSize: "100 kB"
               }
