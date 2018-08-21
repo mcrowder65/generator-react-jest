@@ -1,6 +1,6 @@
 {
   "name": "create-react-matt",
-  "version": "0.0.90",
+  "version": "0.0.91",
   "description": "React, Webpack, Babel, Jest, and code coverage all provided for you",
   "main": "main-index.js",
   "repository": {
@@ -59,7 +59,8 @@
       "!src/client/app.js",
       "!src/client/router.js",
       "!src/registerServiceWorker.js",
-      "!src/server/index.js"
+      "!src/server/index.js",
+      "!src/client/pwa/manifest.json"
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/config.js",
     "moduleNameMapper": {

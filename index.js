@@ -195,7 +195,8 @@ const cli = () => {
                 "!src/client/app.js",
                 "!src/client/router.js",
                 "!src/registerServiceWorker.js",
-                "!src/server/index.js"
+                "!src/server/index.js",
+                "!src/client/pwa/manifest.json"
               ],
               modulePaths: ["src/"],
               coverageReporters: ["html"]

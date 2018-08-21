@@ -132,7 +132,7 @@ var cli = function cli() {
                           "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/file-mock.js",
                           "\\.(css|scss|less)$": "identity-obj-proxy"
                         },
-                        collectCoverageFrom: ["src/**/*.{js*}", "index.js", "!src/client/browser-history.js", "!src/client/app.js", "!src/client/router.js", "!src/registerServiceWorker.js", "!src/server/index.js"],
+                        collectCoverageFrom: ["src/**/*.{js*}", "index.js", "!src/client/browser-history.js", "!src/client/app.js", "!src/client/router.js", "!src/registerServiceWorker.js", "!src/server/index.js", "!src/client/pwa/manifest.json"],
                         modulePaths: ["src/"],
                         coverageReporters: ["html"]
                       })
