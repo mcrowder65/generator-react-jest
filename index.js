@@ -35,6 +35,7 @@ const deps = {
     "babel-plugin-import",
     "babel-preset-env",
     "babel-preset-react",
+    "babel-watch",
     "bundlesize",
     "compression-webpack-plugin",
     "copy-webpack-plugin",
